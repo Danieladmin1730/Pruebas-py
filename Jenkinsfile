@@ -14,16 +14,20 @@ pipeline {
         }
 
         stage('Ejecutar pruebas') {
-            steps {
-                sh '. $VENV_DIR/bin/activate && pytest'
-            }
-        }
+    steps {
+        sh '''
+            . venv/bin/activate
+            pytest --junitxml=report.xml
+        '''
+    }
+}
+
     }
 
     post {
-        always {
-            junit '**/tests/results.xml' // opcional si usas `--junitxml=...`
-            cleanWs()
-        }
+    always {
+        junit 'report.xml'
     }
+}
+
 }
