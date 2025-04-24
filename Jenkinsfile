@@ -13,12 +13,6 @@ pipeline {
             }
         }
 
-        stage('Instalar dependencias') {
-            steps {
-                sh '. $VENV_DIR/bin/activate && pip install -r requirements.txt'
-            }
-        }
-
         stage('Ejecutar pruebas') {
             steps {
                 sh '. $VENV_DIR/bin/activate && pytest'
